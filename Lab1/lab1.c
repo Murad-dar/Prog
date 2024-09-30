@@ -1,58 +1,39 @@
 #include <stdio.h>
 
+int calc_sum_digits(int number)
+{
+    int sum = 0;
+    int rest;
+    while(number != 0){
+        rest = number % 10;
+        sum = sum + rest;
+        number = number / 10;
+    } 
+    return sum;
+}
+
+
 int main()
 {
-    float a, b, c;
+    int a, b;
     printf("Enter a -> ");
-    scanf("%f", &a);
+    scanf("%d", &a);
     printf("Enter b -> ");
-    scanf("%f", &b);
-    printf("Enter c -> ");
-    scanf("%f", &c);
+    scanf("%d", &b);
+   
 
-    if (!a && !b && !c)
+    if (!a && !b)
         return 0;
 
-    float x = 1.0f;
-    printf("f(x) = ");
-    if (a)
-    {
-        printf("%f * x^2 ", a);
-        if (b > 0.0f)
-            printf("+ ");
-    }
-    if (b)
-        printf("%f * x ", b);
-    if (c)
-    {
-        if (c > 0.0f)
-            if (a || b)
-                printf("+ %f", c);
-            else
-                printf("- %f", -c);
-    }
-    printf("\n");
+    int sum_a = calc_sum_digits(a);
+    int sum_b = calc_sum_digits(b);
+    
+    if (sum_a > b)
+        printf("sum_a = %d\n", sum_a);
+    if (sum_a == b)
+        printf("sum_b = %d\n", sum_b);
+    if (sum_a < b)
+        printf("sum_b + b = %d\n", sum_b + b);
 
-    float f_x = a * x * x + b * x + c;
-    float f_minus_x = a * -x * -x + b * -x + c;
-    if (f_x == f_minus_x)
-        printf("Function is even: f(x) = %f = f(-x) = %f\n", f_x, f_minus_x);
-    else if (f_minus_x == -f_x)
-        printf("Function is odd: f(-x) = %f = -f(x) = %f\n", f_minus_x, -f_x);
-    else
-        printf ("Function is neither even nor odd: \
-            f(x) = %f != f(-x) = % f != -f(x) = %f\n" , f_x , f_minus_x , -f_x);
-
-    if (a)
-    {
-        float vx = -b / (2.0f * a);
-        float vy = a * vx * vx + b * vx + c;
-        printf("Vertex (%f, %f) is a ", vx, vy);
-        if (a > 0.0f)
-            printf("minimum");
-        else
-            printf("maximum");
-        printf("\n");
-    }
     return 0;
 }
