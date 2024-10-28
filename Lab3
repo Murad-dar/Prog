@@ -1,1 +1,51 @@
+#include <stdio.h>
+#include <limits.h>
 
+void process_array(int arr[], int size) {
+    if (size == 0) return;
+
+    int min_index = 0, max_index = 0;
+    int min_value = arr[0], max_value = arr[0];
+
+    // Поиск минимум и максимум
+    for (int i = 1; i < size; i++) {
+        if (arr[i] < min_value) {
+            min_value = arr[i];
+            min_index = i;
+        }
+        if (arr[i] > max_value) {
+            max_value = arr[i];
+            max_index = i;
+        }
+    }
+
+    int sum_indices = min_index + max_index;
+
+    // Проверка условия и обновление массива
+    if (sum_indices < 0 && abs(sum_indices) < abs(min_value)) {
+        arr[min_index] = sum_indices;
+        arr[max_index] = sum_indices;
+    } else if (sum_indices > 0 && abs(sum_indices) > abs(max_value)) {
+        arr[min_index] = sum_indices;
+        arr[max_index] = sum_indices;
+    } else {
+        for (int i = (min_index < max_index ? min_index : max_index) + 1; 
+                 i < (min_index > max_index ? min_index : max_index); 
+                 i++) {
+            arr[i] = 0;
+        }
+    }
+}
+
+int main() {
+    int arr[] = {3, 5, 1, 8, 2};
+    int size = sizeof(arr) / sizeof(arr[0]);
+
+    process_array(arr, size);
+
+    // Вывод результата
+    for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+    return 0;
+}
