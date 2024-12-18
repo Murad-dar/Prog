@@ -32,7 +32,43 @@ sweets = {
     'название сладости': [
         {'shop': 'название магазина', 'price': 99.99},
         # TODO тут с клавиатуры введите магазины и цены (можно копипастить ;)
+        {'shop': 'ашан', 'price': 10.99},
+        {'shop': 'пятерочка', 'price': 9.99},
+        {'shop': 'магнит', 'price': 11.99},
     ],
     # TODO тут с клавиатуры введите другую сладость и далее словарь магазинов
+    'конфеты': [
+        {'shop': 'ашан', 'price': 34.99},
+        {'shop': 'пятерочка', 'price': 32.99},
+        {'shop': 'магнит', 'price': 30.99},
+    ],
+    
+    'карамель': [
+        {'shop': 'ашан', 'price': 45.99},
+        {'shop': 'пятерочка', 'price': 46.99},
+        {'shop': 'магнит', 'price': 41.99},
+    ],
+    
+    'пирожное': [
+        {'shop': 'ашан', 'price': 67.99},
+        {'shop': 'пятерочка', 'price': 59.99},
+        {'shop': 'магнит', 'price': 62.99},
+    ],
 }
 # Указать надо только по 2 магазина с минимальными ценами
+lowprice={}
+for i in sweets:
+    lowprice[i]=[]
+    for k in sweets[i]:
+        a=k['price']
+        for j in sweets[i]:
+            if j['price'] > a:
+                a=j['price']
+    for j in sweets[i]:
+        if j['price'] < a:
+            lowprice[i].append(j)
+for i in lowprice:
+    print(i)
+    for j in lowprice[i]:
+        print(j['shop'],j['price'])
+    print("\n")
